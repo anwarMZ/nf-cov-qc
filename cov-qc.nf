@@ -8,6 +8,7 @@ samples_ch = Channel.fromFilePairs('data/*{1,2}.fastq.gz', checkIfExists: true,
 //samples_ch.view()
 
 process fastqc {
+
   input:
   tuple val(sample_id), file(reads_file) from samples_ch
 
@@ -19,6 +20,5 @@ process fastqc {
   mkdir fastqc_${sample_id}_logs
   fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads_file}
   """
-
 
 }
